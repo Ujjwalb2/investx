@@ -1,0 +1,10 @@
+setting for stochastic
+
+%k length =16
+%k smoothing =4
+%d smoothing =4
+
+timeframe of the indicator 30 min
+
+
+A higher timeframe gives much more accuracy, the more the gap between k and d lines, the more sure is the trend, creating a bias c signal for us. 
