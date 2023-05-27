@@ -1,0 +1,18 @@
+import pandas as pd
+import time
+import datetime
+import matplotlib.pyplot as plt
+period1= int(time.mktime(datetime.datetime(2020,12,1,23,59).timetuple()))
+period2= int(time.mktime(datetime.datetime(2022,12,31,23,59).timetuple()))
+interval = '1d'
+ticker=f'https://query1.finance.yahoo.com/v7/finance/download/%5ENSEI?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'
+ticker=pd.read_csv(ticker)
+ticker['14-high'] = ticker['High'].rolling(14).max()
+ticker['14-low'] = ticker['Low'].rolling(14).min()
+ticker['%K'] = (ticker['Close'] - ticker['14-low'])*100/(ticker['14-high'] - ticker['14-low'])
+ticker['%D'] = ticker['%K'].rolling(3).mean()
+ax = ticker[['%K', '%D']].plot()
+ax.axhline(20, linestyle='--', color="r")
+ax.axhline(80, linestyle="--", color="r")
+plt.show()
+
