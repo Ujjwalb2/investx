@@ -128,7 +128,8 @@ original = df[['Date', 'price']]
 original['Date']=pd.to_datetime(original['Date'])
 
 c=df_forecast
-rmse = sqrt(mean_squared_error(original.iloc[:len(c), 1], c.iloc[:, 1]))
+rmse = sqrt(mean_squared_error(original.iloc[:len(c), 1], c.iloc[:, 1]))  #calculating rsme(root mean square error)
+accuracy= 100-rmse   # accuracy of the model
 original.plot(x='Date',y='price')
 original= pd.concat([original,df_forecast],axis=0)
 
